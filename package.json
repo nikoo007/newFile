@@ -2,7 +2,7 @@
   "name": "newfiletemp",
   "displayName": "newFileTemp",
   "description": "新建HTML文件和Vue3模板文件",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "publisher": "haoyang",
   "engines": {
     "vscode": "^1.2.0"
@@ -29,20 +29,6 @@
       {
         "command": "newfiletemp.vue3",
         "title": "新建Vue3"
-      }
-    ],
-    "keybindings": [
-      {
-        "command": "newfiletemp.html",
-        "key": "alt+shift+n",
-        "mac": "option+shift+n",
-        "when": "listFocus"
-      },
-      {
-        "command": "newfiletemp.vue3",
-        "key": "alt+shift+v",
-        "mac": "option+shift+v",
-        "when": "listFocus"
       }
     ],
     "menus": {
