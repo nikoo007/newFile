@@ -8,18 +8,8 @@ export function activate(context: vscode.ExtensionContext) {
   let disposable1 = vscode.commands.registerCommand(
     'newfiletemp.html',
     async (uri: any) => {
-      const pageText = `输入HTML文件名称,空格分隔字段`
-      const FileName = await vscode.window.showInputBox({
-        prompt: pageText,
-      })
-      if (!FileName) {
-        //判断用户是否输入了文件名
-        logger('error', `HTML文件名称不能为空!`)
-        throw new Error(`HTML文件名称不能为空!`)
-      }
-
       createFile({
-        name: FileName,
+        title: '请输入HTML文件名称',
         path: uri.path,
         types: '.html',
         template: htmlTpl,
@@ -29,17 +19,8 @@ export function activate(context: vscode.ExtensionContext) {
   let disposable2 = vscode.commands.registerCommand(
     'newfiletemp.vue3',
     async (uri: any) => {
-      const pageText = `输入Vue文件名称,空格分隔字段`
-      const FileName = await vscode.window.showInputBox({
-        prompt: pageText,
-      })
-      if (!FileName) {
-        //判断用户是否输入了文件名
-        logger('error', `Vue文件名称不能为空!`)
-        throw new Error(`Vue文件名称不能为空!`)
-      }
       createFile({
-        name: FileName,
+        title: `请输入Vue文件名称`,
         path: uri.path,
         types: '.vue',
         template: vue3Tpl,

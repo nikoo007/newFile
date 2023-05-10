@@ -18,17 +18,26 @@ exports.createFile = void 0;
 const index_1 = __webpack_require__(3);
 const fs = __webpack_require__(4);
 const path = __webpack_require__(18);
+const vscode = __webpack_require__(1);
 async function createFile(info) {
+    const FileName = await vscode.window.showInputBox({
+        prompt: info.title,
+    });
+    if (!FileName) {
+        //判断用户是否输入了文件名
+        (0, index_1.logger)('error', `${info.types}文件名称不能为空!`);
+        throw new Error(`${info.types}文件名称不能为空!`);
+    }
     //拼接路径
-    let fpath = path.resolve(info.path, `${info.name}${info.types}`);
+    let fpath = path.resolve(info.path, `${FileName}${info.types}`);
     //判断是window还是mac系统
     fpath = fpath.startsWith('/Users') ? fpath : fpath.substring(1);
     //判断当前文件是否存在
     try {
         const isExisted = await (0, index_1.isFileExisted)(fpath);
         if (isExisted) {
-            (0, index_1.logger)('error', `此位置已存在${info.name}${info.types}文件,请选择其他名称`);
-            throw new Error(`此位置已存在${info.name}${info.types}文件,请选择其他名称`);
+            (0, index_1.logger)('error', `此位置已存在${FileName}${info.types}文件,请选择其他名称`);
+            throw new Error(`此位置已存在${FileName}${info.types}文件,请选择其他名称`);
         }
     }
     catch (error) { }
@@ -2975,39 +2984,20 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.deactivate = exports.activate = void 0;
 const vscode = __webpack_require__(1);
 const FileGen_1 = __webpack_require__(2);
-const utils_1 = __webpack_require__(3);
 const htmlTpl_1 = __webpack_require__(44);
 const vue3Tpl_1 = __webpack_require__(45);
 function activate(context) {
     let disposable1 = vscode.commands.registerCommand('newfiletemp.html', async (uri) => {
-        const pageText = `输入HTML文件名称,空格分隔字段`;
-        const FileName = await vscode.window.showInputBox({
-            prompt: pageText,
-        });
-        if (!FileName) {
-            //判断用户是否输入了文件名
-            (0, utils_1.logger)('error', `HTML文件名称不能为空!`);
-            throw new Error(`HTML文件名称不能为空!`);
-        }
         (0, FileGen_1.createFile)({
-            name: FileName,
+            title: '请输入HTML文件名称',
             path: uri.path,
             types: '.html',
             template: htmlTpl_1.default,
         });
     });
     let disposable2 = vscode.commands.registerCommand('newfiletemp.vue3', async (uri) => {
-        const pageText = `输入Vue文件名称,空格分隔字段`;
-        const FileName = await vscode.window.showInputBox({
-            prompt: pageText,
-        });
-        if (!FileName) {
-            //判断用户是否输入了文件名
-            (0, utils_1.logger)('error', `Vue文件名称不能为空!`);
-            throw new Error(`Vue文件名称不能为空!`);
-        }
         (0, FileGen_1.createFile)({
-            name: FileName,
+            title: `请输入Vue文件名称`,
             path: uri.path,
             types: '.vue',
             template: vue3Tpl_1.default,
