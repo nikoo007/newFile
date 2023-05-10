@@ -15,9 +15,9 @@ export async function createFile(info: FileInfo) {
     throw new Error(`${info.types}文件名称不能为空!`)
   }
   //拼接路径
-  let fpath = path.resolve(info.path, `${FileName}${info.types}`)
   //判断是window还是mac系统
-  fpath = fpath.startsWith('/Users') ? fpath : fpath.substring(1)
+  info.path = info.path.startsWith('/Users') ? info.path : info.path.substring(1)
+  let fpath = path.resolve(info.path, `${FileName}${info.types}`)
 
   //判断当前文件是否存在
   try {
