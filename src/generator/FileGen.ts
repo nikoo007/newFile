@@ -6,7 +6,10 @@ import { FileInfo } from '../domain'
 
 export async function createFile(info: FileInfo) {
   //拼接路径
-  const fpath = path.join(info.path, `${info.name}${info.types}`)
+  let fpath = path.resolve(info.path, `${info.name}${info.types}`)
+  //判断是window还是mac系统
+  fpath = fpath.startsWith('/Users') ? fpath : fpath.substring(1)
+
   //判断当前文件是否存在
   try {
     const isExisted = await isFileExisted(fpath)

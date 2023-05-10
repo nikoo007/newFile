@@ -2,7 +2,8 @@
   "name": "newfiletemp",
   "displayName": "newFileTemp",
   "description": "新建HTML文件和Vue3模板文件",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "publisher": "haoyang",
   "engines": {
     "vscode": "^1.2.0"
   },
