@@ -6,6 +6,11 @@
   "engines": {
     "vscode": "^1.0.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nikoo007/newFile.git",
+    "directory": "."
+  },
   "categories": [
     "Other"
   ],
