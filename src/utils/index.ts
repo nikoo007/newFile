@@ -24,3 +24,12 @@ export function isFileExisted(path_way: string) {
     })
   })
 }
+
+//判断是否是目录
+export function isDirectory(path: string) {
+  try {
+    return fs.statSync(path).isDirectory()
+  } catch (error) {
+    return false
+  }
+}

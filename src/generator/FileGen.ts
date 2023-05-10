@@ -1,4 +1,4 @@
-import { logger, isFileExisted } from '../utils/index'
+import { logger, isFileExisted, isDirectory } from '../utils/index'
 import * as fs from 'fs-extra'
 const path = require('path')
 import * as vscode from 'vscode'
@@ -17,7 +17,18 @@ export async function createFile(info: FileInfo) {
   //拼接路径
   //判断是window还是mac系统
   info.path = info.path.startsWith('/Users') ? info.path : info.path.substring(1)
-  let fpath = path.resolve(info.path, `${FileName}${info.types}`)
+  //判断是目录
+  const flag = isDirectory(info.path)
+  let fpath = ''
+  if (flag) {
+    //是目录
+    fpath = path.resolve(info.path, `${FileName}${info.types}`)
+  } else {
+    //不是目录 就直接生成同级目录
+    const siblingsName = path.basename(info.path)
+    fpath = info.path.replace(siblingsName, `${FileName}${info.types}`)
+    console.log('fpath---' + fpath)
+  }
 
   //判断当前文件是否存在
   try {
