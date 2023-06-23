@@ -8,7 +8,9 @@ const htmlTpl = `<!DOCTYPE html>
   <title>Document</title>
 </head>
 <body>
-  
+  <script>
+       
+  </script>
 </body>
 </html>`
 
