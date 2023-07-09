@@ -1,8 +1,8 @@
 {
   "name": "newfiletemp",
   "displayName": "newFileTemp",
-  "description": "新建HTML文件和Vue3模板文件",
-  "version": "1.0.6",
+  "description": "新建HTML文件和Vue模板文件",
+  "version": "1.0.7",
   "publisher": "haoyang",
   "engines": {
     "vscode": "^1.2.0"
@@ -17,7 +17,8 @@
   ],
   "activationEvents": [
     "onCommand:newfiletemp.html",
-    "onCommand:newfiletemp.vue3"
+    "onCommand:newfiletemp.vue3",
+    "onCommand:newfiletemp.vue2"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -29,12 +30,20 @@
       {
         "command": "newfiletemp.vue3",
         "title": "新建Vue3"
+      },
+      {
+        "command": "newfiletemp.vue2",
+        "title": "新建Vue2"
       }
     ],
     "menus": {
       "explorer/context": [
         {
           "command": "newfiletemp.html",
+          "group": "navigation@09"
+        },
+        {
+          "command": "newfiletemp.vue2",
           "group": "navigation@10"
         },
         {

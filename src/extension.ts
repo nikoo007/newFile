@@ -1,8 +1,8 @@
 import * as vscode from 'vscode'
 import { createFile } from './generator/FileGen'
-import { logger } from './utils'
 import htmlTpl from './template/htmlTpl'
 import vue3Tpl from './template/vue3Tpl'
+import vue2Tpl from './template/vue2Tpl'
 
 export function activate(context: vscode.ExtensionContext) {
   let disposable1 = vscode.commands.registerCommand(
@@ -17,10 +17,22 @@ export function activate(context: vscode.ExtensionContext) {
     }
   )
   let disposable2 = vscode.commands.registerCommand(
+    'newfiletemp.vue2',
+    async (uri: any) => {
+      createFile({
+        title: `请输入Vue2文件名称`,
+        path: uri.path,
+        types: '.vue',
+        template: vue2Tpl,
+      })
+    }
+  )
+
+  let disposable3 = vscode.commands.registerCommand(
     'newfiletemp.vue3',
     async (uri: any) => {
       createFile({
-        title: `请输入Vue文件名称`,
+        title: `请输入Vue3文件名称`,
         path: uri.path,
         types: '.vue',
         template: vue3Tpl,
@@ -28,7 +40,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
   )
 
-  context.subscriptions.push(disposable1, disposable2)
+  context.subscriptions.push(disposable1, disposable2,disposable3)
 }
 
 // This method is called when your extension is deactivated
